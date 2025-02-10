@@ -25,32 +25,34 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center overflow-hidden bg-gray-50/30">
+    <div className="min-h-screen flex items-center justify-center overflow-hidden bg-transparent">
       {/* 3D Background */}
       <KitchenBackground />
 
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-recipe-500/10 via-transparent to-recipe-500/5" style={{ zIndex: 1 }}></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-recipe-500/10 via-transparent to-recipe-500/5" style={{ zIndex: 1 }}>
+        <div className="absolute inset-0 backdrop-blur-[1px]"></div>
+      </div>
 
       {/* Main container */}
-      <div className="relative w-full max-w-md mx-4" style={{ zIndex: 2 }}>
-        <div className="bg-white/95 backdrop-blur-sm rounded-[2rem] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] ring-1 ring-white/20 transform transition-all duration-500 hover:scale-[1.01]">
+      <div className="relative w-full max-w-md mx-4 mt-32" style={{ zIndex: 2 }}>
+        <div className="bg-white/80 backdrop-blur-sm rounded-[2rem] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.2)] ring-1 ring-white/20 transform transition-all duration-500 hover:scale-[1.02] hover:bg-white/85">
           {/* Decorative header */}
-          <div className="h-3 bg-gradient-to-r from-recipe-400 via-recipe-500 to-recipe-600 rounded-t-[2rem]"></div>
+          <div className="h-3 bg-gradient-to-r from-recipe-400 via-recipe-500 to-recipe-600 rounded-t-[2rem] animate-gradient-x"></div>
 
           {/* Main content */}
-          <div className="p-8 space-y-8">
+          <div className="p-10 space-y-8">
             {/* Logo and title */}
-            <div className="text-center space-y-2">
-              <div className="flex justify-center mb-4">
-                <div className="w-20 h-20 bg-recipe-50 rounded-2xl flex items-center justify-center ring-8 ring-recipe-100/30 transform transition-all duration-500 hover:rotate-[5deg]">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-recipe-600" viewBox="0 0 20 20" fill="currentColor">
+            <div className="text-center space-y-3">
+              <div className="flex justify-center mb-6">
+                <div className="w-24 h-24 bg-recipe-50 rounded-2xl flex items-center justify-center ring-8 ring-recipe-100/30 transform transition-all duration-500 hover:rotate-[8deg] hover:scale-110">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-14 w-14 text-recipe-600" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2zm-.25 4a.5.5 0 11-1 0 .5.5 0 011 0zM10 7v1h1V7h-1z"/>
                   </svg>
                 </div>
               </div>
-              <h1 className="text-4xl font-bold text-gray-900 tracking-tight">Let's Cook!</h1>
-              <p className="text-gray-600">Sign in to discover amazing recipes</p>
+              <h1 className="text-5xl font-bold text-gray-900 tracking-tight">Let's Cook!</h1>
+              <p className="text-gray-600 text-lg">Sign in to discover amazing recipes</p>
             </div>
 
             {/* Error message */}
@@ -72,14 +74,14 @@ const Login = () => {
                   <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-2">
                     Username
                   </label>
-                  <div className="relative">
+                  <div className="relative transform transition-all duration-300 hover:translate-x-1">
                     <input
                       id="username"
                       type="text"
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
-                      className="block w-full pl-12 pr-4 py-4 rounded-xl border-0 ring-1 ring-gray-200 focus:ring-2 focus:ring-recipe-500 bg-white/70 placeholder-gray-400 text-gray-900 transition-all duration-300 focus:bg-white"
-                      placeholder="Entrez votre nom d'utilisateur"
+                      className="block w-full pl-12 pr-4 py-4 rounded-xl border-0 ring-1 ring-gray-200 focus:ring-2 focus:ring-recipe-500 bg-white/70 placeholder-gray-400 text-gray-900 transition-all duration-300 focus:bg-white focus:shadow-lg"
+                      placeholder="Enter your username"
                       required
                     />
                     <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
@@ -94,14 +96,14 @@ const Login = () => {
                   <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
                     Password
                   </label>
-                  <div className="relative">
+                  <div className="relative transform transition-all duration-300 hover:translate-x-1">
                     <input
                       id="password"
                       type="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="block w-full pl-12 pr-4 py-4 rounded-xl border-0 ring-1 ring-gray-200 focus:ring-2 focus:ring-recipe-500 bg-white/70 placeholder-gray-400 text-gray-900 transition-all duration-300 focus:bg-white"
-                      placeholder="Entrez votre mot de passe"
+                      className="block w-full pl-12 pr-4 py-4 rounded-xl border-0 ring-1 ring-gray-200 focus:ring-2 focus:ring-recipe-500 bg-white/70 placeholder-gray-400 text-gray-900 transition-all duration-300 focus:bg-white focus:shadow-lg"
+                      placeholder="Enter your password"
                       required
                     />
                     <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
@@ -115,7 +117,7 @@ const Login = () => {
 
               <button
                 type="submit"
-                className="w-full flex justify-center py-4 px-4 rounded-xl text-white bg-gradient-to-r from-recipe-500 to-recipe-600 hover:from-recipe-600 hover:to-recipe-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-recipe-500 transform transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] font-medium"
+                className="w-full py-4 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-recipe-600 hover:bg-recipe-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-recipe-500 transition-all duration-300 transform hover:translate-y-[-2px] hover:shadow-lg"
               >
                 Sign in
               </button>

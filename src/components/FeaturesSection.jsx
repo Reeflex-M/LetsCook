@@ -4,23 +4,23 @@ import { FaUtensils, FaUsers, FaHeart, FaMedal } from 'react-icons/fa';
 const features = [
   {
     icon: FaUtensils,
-    title: "Recettes Exclusives",
-    description: "Découvrez des recettes uniques créées par des chefs passionnés"
+    title: "Exclusive Recipes",
+    description: "Discover unique recipes created by passionate chefs"
   },
   {
     icon: FaUsers,
-    title: "Communauté Active",
-    description: "Partagez vos expériences et apprenez des autres passionnés"
+    title: "Active Community",
+    description: "Share your experiences and learn from other enthusiasts"
   },
   {
     icon: FaHeart,
-    title: "Collections Personnalisées",
-    description: "Sauvegardez vos recettes préférées et créez vos collections"
+    title: "Custom Collections",
+    description: "Save your favorite recipes and create your collections"
   },
   {
     icon: FaMedal,
-    title: "Guides Détaillés",
-    description: "Suivez des tutoriels pas à pas pour réussir vos plats"
+    title: "Detailed Guides",
+    description: "Follow step-by-step tutorials to perfect your dishes"
   }
 ];
 
@@ -36,10 +36,10 @@ const FeaturesSection = () => {
           className="text-center mb-12"
         >
           <h2 className="text-3xl font-bold text-gray-800 mb-4">
-            Pourquoi Choisir LetsCook ?
+            Why Choose LetsCook?
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Découvrez une nouvelle façon de cuisiner avec notre plateforme intuitive et notre communauté passionnée
+            Discover a new way of cooking with our intuitive platform and passionate community
           </p>
         </motion.div>
 

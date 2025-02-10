@@ -3,7 +3,7 @@ import Navbar from '../components/layout/Navbar';
 import RecipeModal from '../components/recipes/RecipeModal';
 import useFavorites from '../hooks/useFavorites';
 
-const Favoris = () => {
+const Favorites = () => {
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const { favorites, removeFavorite, isFavorite } = useFavorites();
   const [searchTerm, setSearchTerm] = useState('');
@@ -19,7 +19,7 @@ const Favoris = () => {
     <div className="min-h-screen bg-gray-100">
       <Navbar />
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Mes Recettes Favorites</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-8">My Favorite Recipes</h1>
 
         {favorites.length === 0 ? (
           <div className="text-center py-12">
@@ -36,9 +36,9 @@ const Favoris = () => {
                 d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
               />
             </svg>
-            <h3 className="mt-2 text-sm font-medium text-gray-900">Aucune recette favorite</h3>
+            <h3 className="mt-2 text-sm font-medium text-gray-900">No favorite recipes</h3>
             <p className="mt-1 text-sm text-gray-500">
-              Commencez à ajouter des recettes à vos favoris pour les retrouver ici.
+              Start adding recipes to your favorites to see them here.
             </p>
           </div>
         ) : (
@@ -46,7 +46,7 @@ const Favoris = () => {
             <div className="mb-6">
               <input
                 type="text"
-                placeholder="Rechercher dans vos favoris..."
+                placeholder="Search in your favorites..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full max-w-md px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-recipe-500 focus:border-transparent"
@@ -84,7 +84,7 @@ const Favoris = () => {
                   <div className="p-4">
                     <h2 className="text-xl font-semibold text-gray-900 mb-2">{recipe.name}</h2>
                     <p className="text-gray-600 text-sm mb-4">
-                      {recipe.description ? recipe.description.slice(0, 100) + '...' : 'Pas de description disponible'}
+                      {recipe.description ? recipe.description.slice(0, 100) + '...' : 'No description available'}
                     </p>
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-gray-500">
@@ -94,7 +94,7 @@ const Favoris = () => {
                         onClick={() => setSelectedRecipe(recipe)}
                         className="px-4 py-2 bg-recipe-500 text-white rounded-lg hover:bg-recipe-600 transition-colors"
                       >
-                        Voir la recette
+                        View recipe
                       </button>
                     </div>
                   </div>
@@ -104,17 +104,11 @@ const Favoris = () => {
           </>
         )}
       </div>
-
       {selectedRecipe && (
-        <RecipeModal
-          recipe={selectedRecipe}
-          onClose={() => setSelectedRecipe(null)}
-          isFavorite={true}
-          onToggleFavorite={() => removeFavorite(selectedRecipe.id)}
-        />
+        <RecipeModal recipe={selectedRecipe} onClose={() => setSelectedRecipe(null)} />
       )}
     </div>
   );
 };
 
-export default Favoris;
+export default Favorites;

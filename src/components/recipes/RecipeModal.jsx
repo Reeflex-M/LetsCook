@@ -47,16 +47,16 @@ const RecipeModal = ({ recipe, onClose, isFavorite, onToggleFavorite }) => {
 
             <div className="grid grid-cols-3 gap-4 mb-6">
               <div className="text-center">
-                <span className="block text-gray-500 text-sm">Temps</span>
+                <span className="block text-gray-500 text-sm">Time</span>
                 <span className="font-semibold">{recipe.total_time_minutes || '30'} min</span>
               </div>
               <div className="text-center">
-                <span className="block text-gray-500 text-sm">Portions</span>
+                <span className="block text-gray-500 text-sm">Servings</span>
                 <span className="font-semibold">{recipe.num_servings || '4'}</span>
               </div>
               <div className="text-center">
-                <span className="block text-gray-500 text-sm">Difficulté</span>
-                <span className="font-semibold">{recipe.difficulty || 'Facile'}</span>
+                <span className="block text-gray-500 text-sm">Difficulty</span>
+                <span className="font-semibold">{recipe.difficulty || 'Easy'}</span>
               </div>
             </div>
 
@@ -68,7 +68,7 @@ const RecipeModal = ({ recipe, onClose, isFavorite, onToggleFavorite }) => {
             )}
 
             <div className="mb-6">
-              <h3 className="text-lg font-semibold mb-2">Ingrédients</h3>
+              <h3 className="text-lg font-semibold mb-2">Ingredients</h3>
               <ul className="list-disc list-inside space-y-2">
                 {recipe.sections?.[0]?.components?.map((component, index) => (
                   <li key={index} className="text-gray-600">
@@ -93,7 +93,7 @@ const RecipeModal = ({ recipe, onClose, isFavorite, onToggleFavorite }) => {
 
             {recipe.nutrition && (
               <div>
-                <h3 className="text-lg font-semibold mb-2">Information Nutritionnelle</h3>
+                <h3 className="text-lg font-semibold mb-2">Nutritional Information</h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {Object.entries(recipe.nutrition).map(([key, value]) => (
                     <div key={key} className="text-center">

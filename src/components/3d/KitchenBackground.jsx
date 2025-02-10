@@ -3,6 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Float, PerspectiveCamera, OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 
+//Animation threeJS page LOGIN
 const SpoonModel = ({ position, rotation, scale }) => {
   const mesh = useRef();
 
@@ -109,57 +110,63 @@ const ForkModel = ({ position, rotation, scale }) => {
 
 const KitchenBackground = () => {
   return (
-    <div className="fixed inset-0" style={{ zIndex: 0 }}>
-      <Canvas
-        shadows
-        dpr={[1, 2]}
-        camera={{ position: [0, 0, 15], fov: 45 }}
-        gl={{ 
-          antialias: true,
-          alpha: true,
-          powerPreference: "high-performance",
-        }}
-      >
+    <div className="absolute inset-0" style={{ zIndex: 0 }}>
+      <Canvas shadows dpr={[1, 2]}>
+        <PerspectiveCamera makeDefault position={[0, 0, 8]} fov={60} />
         <color attach="background" args={['#f8fafc']} />
-        <fog attach="fog" args={['#f8fafc', 30, 40]} />
         
-        <ambientLight intensity={0.5} />
+        {/* Enhanced lighting */}
+        <ambientLight intensity={0.8} />
         <directionalLight
+          position={[5, 5, 5]}
+          intensity={1.2}
           castShadow
-          position={[2.5, 8, 5]}
-          intensity={1.5}
-          shadow-mapSize={[1024, 1024]}
-        >
-          <orthographicCamera attach="shadow-camera" args={[-10, 10, -10, 10]} />
-        </directionalLight>
-        <pointLight position={[-10, -10, -10]} intensity={0.5} />
-
-        <SpoonModel 
-          position={[-3, 2, -2]} 
-          rotation={[0, 0, -Math.PI / 4]} 
-          scale={0.6}
+          shadow-mapSize-width={1024}
+          shadow-mapSize-height={1024}
         />
-        <ForkModel 
-          position={[3, -1, -1]} 
-          rotation={[0, 0, Math.PI / 6]} 
-          scale={0.6}
-        />
-        <SpoonModel 
-          position={[2.5, 2, -3]} 
-          rotation={[0, 0, -Math.PI / 3]} 
-          scale={0.5}
-        />
-        <ForkModel 
-          position={[-2.5, -2, -2]} 
-          rotation={[0, 0, Math.PI / 5]} 
-          scale={0.5}
+        <pointLight position={[-5, -5, -5]} intensity={0.7} />
+        <spotLight
+          position={[10, 10, 10]}
+          angle={0.3}
+          penumbra={1}
+          intensity={1.2}
+          castShadow
         />
 
-        <OrbitControls 
+        {/* Kitchen utensils with enhanced positioning and scale */}
+        <group position={[0, 0, -2]}>
+          <SpoonModel 
+            position={[-3, 1, 0]} 
+            rotation={[0, 0, -Math.PI / 4]} 
+            scale={1.5} 
+          />
+          <ForkModel 
+            position={[3, -1, 0]} 
+            rotation={[0, 0, Math.PI / 4]} 
+            scale={1.5} 
+          />
+          <SpoonModel 
+            position={[-1, 3, -1]} 
+            rotation={[0, 0, Math.PI / 6]} 
+            scale={1.2} 
+          />
+          <ForkModel 
+            position={[1, -3, -1]} 
+            rotation={[0, 0, -Math.PI / 6]} 
+            scale={1.2} 
+          />
+        </group>
+
+        {/* Scene environment and controls */}
+        <OrbitControls
           enableZoom={false}
           enablePan={false}
-          enableRotate={false}
+          autoRotate
+          autoRotateSpeed={1}
+          maxPolarAngle={Math.PI / 1.5}
+          minPolarAngle={Math.PI / 3}
         />
+        <fog attach="fog" args={['#f8fafc', 10, 20]} />
       </Canvas>
     </div>
   );

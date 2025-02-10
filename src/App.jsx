@@ -1,14 +1,17 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import Home from './pages/Home';
+import Recipes from './pages/Recipes';
+import Favorites from './pages/Favorites';
+import Login from './pages/Login';
 import ProtectedRoute from './components/ProtectedRoute';
 import Navbar from './components/layout/Navbar';
-import Login from './pages/Login';
-import Home from './pages/Home';
-import Recettes from './pages/Recettes';
-import Favoris from './pages/Favoris';
 import './App.css';
 
-function App() {
+const App = () => {
   return (
     <AuthProvider>
       <Router>
@@ -29,26 +32,26 @@ function App() {
               }
             />
             <Route
-              path="/recettes"
+              path="/recipes"
               element={
                 <ProtectedRoute>
                   <div className="flex">
                     <Navbar />
                     <main className="flex-1 sm:ml-64 p-6">
-                      <Recettes />
+                      <Recipes />
                     </main>
                   </div>
                 </ProtectedRoute>
               }
             />
             <Route
-              path="/favoris"
+              path="/favorites"
               element={
                 <ProtectedRoute>
                   <div className="flex">
                     <Navbar />
                     <main className="flex-1 sm:ml-64 p-6">
-                      <Favoris />
+                      <Favorites />
                     </main>
                   </div>
                 </ProtectedRoute>
@@ -58,8 +61,9 @@ function App() {
           </Routes>
         </div>
       </Router>
+      <ToastContainer />
     </AuthProvider>
   );
-}
+};
 
 export default App;

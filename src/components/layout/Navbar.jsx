@@ -7,9 +7,9 @@ const Navbar = () => {
   const location = useLocation();
 
   const navItems = [
-    { name: 'Accueil', path: '/', icon: FaHome },
-    { name: 'Recettes', path: '/recettes', icon: FaBook },
-    { name: 'Favoris', path: '/favoris', icon: FaHeart },
+    { name: 'Home', path: '/', icon: FaHome },
+    { name: 'Recipes', path: '/recipes', icon: FaBook },
+    { name: 'Favorites', path: '/favorites', icon: FaHeart },
   ];
 
   const isActive = (path) => location.pathname === path;
