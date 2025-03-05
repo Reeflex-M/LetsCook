@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaHome, FaBook, FaHeart, FaBars, FaTimes } from 'react-icons/fa';
+import { FaHome, FaBook, FaHeart, FaBars, FaTimes, FaSignOutAlt } from 'react-icons/fa';
+import { useAuth } from '../../context/AuthContext';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const { logout } = useAuth();
 
   const navItems = [
     { name: 'Home', path: '/', icon: FaHome },
@@ -13,6 +15,10 @@ const Navbar = () => {
   ];
 
   const isActive = (path) => location.pathname === path;
+
+  const handleLogout = () => {
+    logout();
+  };
 
   return (
     <>
@@ -40,6 +46,15 @@ const Navbar = () => {
               </Link>
             ))}
           </div>
+        </div>
+        <div className="p-4 mt-auto">
+          <button
+            onClick={handleLogout}
+            className="w-full flex items-center px-4 py-3 text-gray-600 hover:text-orange-500 hover:bg-orange-50 rounded-lg transition-colors duration-200 ease-in-out"
+          >
+            <FaSignOutAlt className="mr-3 text-xl" />
+            Logout
+          </button>
         </div>
       </nav>
 
@@ -76,6 +91,13 @@ const Navbar = () => {
                   {item.name}
                 </Link>
               ))}
+              <button
+                onClick={handleLogout}
+                className="w-full flex items-center px-4 py-3 text-gray-600 hover:text-orange-500 hover:bg-orange-50 rounded-lg"
+              >
+                <FaSignOutAlt className="mr-3" />
+                Logout
+              </button>
             </div>
           </div>
         )}

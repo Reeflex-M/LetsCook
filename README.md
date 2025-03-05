@@ -1,38 +1,77 @@
-Introduction:
-A l’aide des cours et des projets réalisés, vous allez devoir réaliser une application avec React afin de valider vos compétences. Cette application aura pour but que vous travailliez à la fois sur de la documentation, les divers hooks existants, et toutes les librairies que vous aimez utiliser.
+# LetsCook
 
-Le projet:
+LetsCook est une application web de recettes permettant aux utilisateurs de découvrir, rechercher et sauvegarder leurs recettes préférées. Elle a été développée avec React et utilise l'API Tasty de RapidAPI.
 
-Le but de ce projet est de créer une application avec un interface de connexion, une fois connecté, l’utilisateur accédera à une page avec des recettes proposées de base. Il aura accès à une barre de recherche permettant de rechercher des recettes par nom ou par ingrédients.
-Une fois la recherche effectuée, une nouvelle liste apparaît. Au clic sur une des recettes, l’utilisateur pourra accéder à une page dédiée à la recette avec plus d'informations.t
-Sur la page dédiée à la recette, l’utilisateur pourra consulter diverses infos supplémentaires comme par exemple des conseils d’autres utilisateurs. 
-L’utilisateur pourra enregistrer les recettes qu’il souhaite en favoris. Une page Favoris permettra de récupérer les recettes favorites de l’utilisateur et de les consulter rapidement.
-Un bouton de déconnexion permet de se déconnecter de l’appli.
-L’utilisateur doit pouvoir supprimer des recettes de ses favoris.
-L’application doit faire appel à l’api Tasty de rapidApi:
-https://rapidapi.com/apidojo/api/tasty
- 
-Infos diverses:
-L’api retournant des résultats en anglais, l’application devra elle-même être en anglais.
-Pour la connexion, vous pouvez au choix utiliser un backend cloud ou une solution alternative (comme par exemple Clerk) ou bien vous pouvez tout simplement mettre un login/mdp en dur (à me transmettre par mail)
-Pour ce qui est des favoris, vous pouvez les enregistrer dans le localStorage
-Attention aux appels API, vous avez le droit gratuitement à 500 appels / mois
-N’hésitez pas à documenter votre application, vous pouvez utiliser plusieurs supports au besoins:
-Doc readme.md
-doc pdf
-commentaires dans le code
-vidéo explicative
-inspirations etc…
+## Comment exécuter le projet
 
-Quelques références utiles:
+### Prérequis
+- Node.js (version 14 ou supérieure)
+- NPM ou Yarn
+- Une clé API Tasty de RapidAPI
 
-https://vite.dev/
-https://reactrouter.com/
-https://fr.react.dev/
-https://rapidapi.com/hub
+### Installation
 
+1. Clonez le dépôt sur votre machine locale
+   ```
+   git clone <url-du-repo>
+   cd LetsCook
+   ```
 
-Rendu le 06/03/25
-si rendu après -5
-après le 09 -> 0
-"# LetsCook" 
+2. Installez les dépendances
+   ```
+   npm install
+   # ou
+   yarn install
+   ```
+
+3. Créez un fichier `.env` à la racine du projet avec votre clé API
+   ```
+   VITE_RAPIDAPI_KEY=votre_clé_api_ici
+   ```
+
+4. Lancez l'application en mode développement
+   ```
+   npm run dev
+   # ou
+   yarn dev
+   ```
+
+5. Ouvrez [http://localhost:5173](http://localhost:5173) dans votre navigateur
+
+### Informations de connexion
+- **Nom d'utilisateur**: admin
+- **Mot de passe**: admin123
+
+## Fonctionnalités
+
+- **Authentification**: Système de connexion simple avec protection des routes
+- **Découverte de recettes**: Affichage de recettes populaires via l'API Tasty
+- **Recherche avancée**: Recherche par nom ou par ingrédients
+- **Favoris**: Possibilité d'ajouter/supprimer des recettes aux favoris (stockés en localStorage)
+- **Vue détaillée**: Informations complètes sur chaque recette (ingrédients, instructions, nutrition)
+- **Commentaires**: Ajout de conseils et commentaires sur les recettes (stockés en localStorage)
+- **Responsive**: Interface adaptée aux mobiles et ordinateurs
+
+## Technologies utilisées
+
+- **React**: Framework JavaScript pour l'interface utilisateur
+- **Vite**: Outil de build rapide pour le développement moderne
+- **React Router**: Gestion des routes et navigation
+- **Tailwind CSS**: Framework CSS utilitaire pour le design
+- **RapidAPI Tasty**: Source des données de recettes
+- **Local Storage**: Stockage côté client pour les favoris et commentaires
+
+## Notes sur l'API
+
+L'API Tasty est limitée à 500 appels par mois sur le plan gratuit. Si vous atteignez cette limite, l'application affichera un message d'erreur approprié.
+
+## Structure du projet
+
+- `src/components`: Composants réutilisables
+- `src/pages`: Pages principales de l'application
+- `src/context`: Contextes React (authentification)
+- `src/hooks`: Hooks personnalisés (gestion des favoris)
+
+---
+
+Projet réalisé dans le cadre du cours de développement web React.

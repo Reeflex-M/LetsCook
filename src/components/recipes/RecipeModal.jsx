@@ -1,6 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-const RecipeModal = ({ recipe, onClose, isFavorite, onToggleFavorite }) => {
+const RecipeModal = ({ recipe, onClose }) => {
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState('');
+  
+  // Load comments from localStorage on mount
+  useEffect(() => {
+    const storedComments = localStorage.getItem(`recipe-comments-${recipe.id}`);
+    if (storedComments) {
+      setComments(JSON.parse(storedComments));
+    }
+  }, [recipe.id]);
+
+  // Save comments to localStorage when they change
+  const saveComments = (updatedComments) => {
+    localStorage.setItem(`recipe-comments-${recipe.id}`, JSON.stringify(updatedComments));
+    setComments(updatedComments);
+  };
+
+  const handleAddComment = (e) => {
+    e.preventDefault();
+    if (!newComment.trim()) return;
+    
+    const comment = {
+      id: Date.now(),
+      text: newComment,
+      author: 'You',
+      date: new Date().toISOString()
+    };
+    
+    const updatedComments = [...comments, comment];
+    saveComments(updatedComments);
+    setNewComment('');
+  };
+
   if (!recipe) return null;
 
   return (
@@ -8,24 +41,6 @@ const RecipeModal = ({ recipe, onClose, isFavorite, onToggleFavorite }) => {
       <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
         <div className="relative">
           <div className="absolute top-4 right-4 flex gap-2">
-            <button
-              onClick={onToggleFavorite}
-              className="p-2 rounded-full bg-white shadow-md hover:bg-gray-100 transition-colors"
-            >
-              <svg
-                className={`w-6 h-6 ${isFavorite ? 'text-red-500' : 'text-gray-400'}`}
-                fill={isFavorite ? 'currentColor' : 'none'}
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                />
-              </svg>
-            </button>
             <button
               onClick={onClose}
               className="p-2 rounded-full bg-white shadow-md hover:bg-gray-100 transition-colors"
@@ -92,7 +107,7 @@ const RecipeModal = ({ recipe, onClose, isFavorite, onToggleFavorite }) => {
             )}
 
             {recipe.nutrition && (
-              <div>
+              <div className="mb-6">
                 <h3 className="text-lg font-semibold mb-2">Nutritional Information</h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {Object.entries(recipe.nutrition).map(([key, value]) => (
@@ -104,6 +119,53 @@ const RecipeModal = ({ recipe, onClose, isFavorite, onToggleFavorite }) => {
                 </div>
               </div>
             )}
+
+            {/* User Comments/Tips Section */}
+            <div className="mt-8 border-t pt-6">
+              <h3 className="text-lg font-semibold mb-4">User Tips & Comments</h3>
+              
+              {/* Comment List */}
+              <div className="space-y-4 mb-6">
+                {comments.length === 0 ? (
+                  <p className="text-gray-500 italic">No tips yet. Be the first to share your experience!</p>
+                ) : (
+                  comments.map(comment => (
+                    <div key={comment.id} className="bg-gray-50 p-4 rounded-lg">
+                      <div className="flex justify-between">
+                        <span className="font-medium text-gray-700">{comment.author}</span>
+                        <span className="text-sm text-gray-500">
+                          {new Date(comment.date).toLocaleDateString()}
+                        </span>
+                      </div>
+                      <p className="mt-2 text-gray-600">{comment.text}</p>
+                    </div>
+                  ))
+                )}
+              </div>
+              
+              {/* Comment Form */}
+              <form onSubmit={handleAddComment} className="mt-4">
+                <div className="mb-3">
+                  <label htmlFor="comment" className="block text-sm font-medium text-gray-700 mb-1">
+                    Add your tip or comment
+                  </label>
+                  <textarea
+                    id="comment"
+                    value={newComment}
+                    onChange={(e) => setNewComment(e.target.value)}
+                    rows="3"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+                    placeholder="Share your experience or tips for this recipe..."
+                  ></textarea>
+                </div>
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                >
+                  Post Comment
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>

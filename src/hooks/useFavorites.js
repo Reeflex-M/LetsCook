@@ -4,7 +4,7 @@ const useFavorites = () => {
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
-    // Load favorites from localStorage on mount
+    // Load favorites from localstorage on mount
     const storedFavorites = localStorage.getItem('favorites');
     if (storedFavorites) {
       setFavorites(JSON.parse(storedFavorites));
