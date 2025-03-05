@@ -4,11 +4,12 @@ import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 
 
-//Animation kebab -> Home/HeroSection
+//Animation kebab from  Home/HeroSection -> template 3D ThreeJS
+
 function Kebab() {
   const kebabRef = React.useRef();
 
-  // Couleurs de la viande
+  // colors of the meat
   const meatColors = [
     new THREE.Color('#8B4513').multiplyScalar(1.2), 
     new THREE.Color('#A0522D').multiplyScalar(1.1), 
@@ -24,7 +25,6 @@ function Kebab() {
 
   return (
     <group ref={kebabRef} rotation={[0, 0, -Math.PI / 6]}>
-      {/* Broche */}
       <mesh rotation={[0, 0, Math.PI / 2]}>
         <cylinderGeometry args={[0.03, 0.03, 4.5, 16]} />
         <meshStandardMaterial
@@ -34,7 +34,7 @@ function Kebab() {
         />
       </mesh>
 
-      {/* Morceaux de viande */}
+      
       {Array.from({ length: 20 }, (_, i) => {
         const scale = 0.7 + Math.random() * 0.3;
         const rotX = Math.random() * Math.PI * 2;
@@ -44,7 +44,6 @@ function Kebab() {
 
         return (
           <group key={i} position={[0, posY, 0]} rotation={[rotX, 0, rotZ]}>
-            {/* Morceau principal */}
             <mesh scale={[scale, 1, scale]}>
               <cylinderGeometry args={[0.25, 0.22, 0.25, 8]} />
               <meshStandardMaterial
@@ -56,7 +55,6 @@ function Kebab() {
               />
             </mesh>
 
-            {/* Effet de grillade */}
             <mesh scale={[scale * 1.01, 1.01, scale * 1.01]}>
               <cylinderGeometry args={[0.25, 0.22, 0.25, 8]} />
               <meshStandardMaterial
@@ -68,7 +66,6 @@ function Kebab() {
               />
             </mesh>
 
-            {/* Effet de gras aléatoire */}
             {Math.random() > 0.7 && (
               <mesh 
                 position={[0.15 + Math.random() * 0.1, 0, 0]} 
@@ -89,7 +86,7 @@ function Kebab() {
         );
       })}
 
-      {/* Effet de fumée */}
+      {/* Fumée */}
       {Array.from({ length: 5 }, (_, i) => (
         <mesh
           key={`smoke-${i}`}
